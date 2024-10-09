@@ -1,0 +1,35 @@
+body {
+    background-color: #FEFAE0;
+}
+
+button {
+    border-radius: 10px;
+}
+
+#start-page, #quiz-page {
+    background-color: #FEFAE0;
+}
+
+#conjunction-text {
+    font-size: 2rem;
+    color: #626F47;
+}
+
+button {
+    background-color: #F2EED7;
+    color: #626F47;
+}
+
+button.btn-success {
+    background-color: #798645;
+    color: white;
+}
+
+button.btn-danger {
+    background-color: #DC3545;
+    color: white;
+}
+
+button.m-2 {
+    margin: 10px;
+}
