@@ -114,7 +114,8 @@ const meanings = [
     "요약", "결말", "강조", "관해서", "관련없이", "부연설명"
 ];
 
-let correctMeaning = '';
+let totalQuestions = 0;
+let correctAnswers = 0;
 
 document.getElementById('start-btn').addEventListener('click', startQuiz);
 document.getElementById('stop-btn').addEventListener('click', stopQuiz);
@@ -128,6 +129,15 @@ function startQuiz() {
 function stopQuiz() {
     document.getElementById('quiz-page').classList.add('d-none');
     document.getElementById('start-page').classList.remove('d-none');
+    totalQuestions = 0;  // 문제 수 초기화
+    correctAnswers = 0;  // 맞춘 문제 수 초기화
+    updateCorrectRate();  // 정답률 초기화
+}
+
+function updateCorrectRate() {
+    const rate = totalQuestions === 0 ? 0 : Math.round((correctAnswers / totalQuestions) * 100);
+    document.getElementById('correct-rate').textContent = `정답률: ${rate}%`;
+    document.getElementById('score').textContent = `${correctAnswers} / ${totalQuestions}`;
 }
 
 function generateQuiz() {
@@ -154,21 +164,26 @@ function generateQuiz() {
 }
 
 function handleAnswer(button, selectedMeaning) {
+    totalQuestions++;  // 총 문제 수 증가
+
     if (selectedMeaning === correctMeaning) {
-        button.classList.remove('btn-outline-secondary');  // 외곽선 유지
+        correctAnswers++;  // 맞춘 문제 수 증가
+        button.classList.remove('btn-outline-secondary');
         button.classList.add('btn-success');
     } else {
-        button.classList.remove('btn-outline-secondary');  // 외곽선 유지
+        button.classList.remove('btn-outline-secondary');
         button.classList.add('btn-danger');
         const correctButton = Array.from(document.querySelectorAll('button')).find(btn => btn.textContent === correctMeaning);
-        correctButton.classList.remove('btn-outline-secondary');  // 외곽선 유지
+        correctButton.classList.remove('btn-outline-secondary');
         correctButton.classList.add('btn-success');
     }
 
+    updateCorrectRate();  // 정답률 업데이트
+
+    // 2초 후에 다음 문제를 생성
     setTimeout(() => {
-        button.classList.remove('btn-success', 'btn-danger'); // 버튼 색상 초기화
-        button.classList.add('btn-outline-secondary');  // 외곽선 복구
+        button.classList.remove('btn-success', 'btn-danger');
+        button.classList.add('btn-outline-secondary');
         generateQuiz();
     }, 2000);
 }
-

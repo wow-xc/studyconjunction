@@ -13,6 +13,11 @@ button {
 #conjunction-text {
     font-size: 2rem;
     color: #626F47;
+    text-align: center; /* 중앙 정렬 */
+}
+
+#correct-rate, #score {
+    font-size: 1.2rem; /* 정답률 크기 조정 */
 }
 
 button {
