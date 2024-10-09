@@ -155,16 +155,20 @@ function generateQuiz() {
 
 function handleAnswer(button, selectedMeaning) {
     if (selectedMeaning === correctMeaning) {
+        button.classList.remove('btn-outline-secondary');  // 외곽선 유지
         button.classList.add('btn-success');
     } else {
+        button.classList.remove('btn-outline-secondary');  // 외곽선 유지
         button.classList.add('btn-danger');
         const correctButton = Array.from(document.querySelectorAll('button')).find(btn => btn.textContent === correctMeaning);
+        correctButton.classList.remove('btn-outline-secondary');  // 외곽선 유지
         correctButton.classList.add('btn-success');
     }
 
-    // 2초 후에 다음 문제를 생성
     setTimeout(() => {
         button.classList.remove('btn-success', 'btn-danger'); // 버튼 색상 초기화
+        button.classList.add('btn-outline-secondary');  // 외곽선 복구
         generateQuiz();
     }, 2000);
 }
+
